@@ -50,8 +50,8 @@ The full conceptual model includes Venue, Show, Artist, Song, Setlist, User, and
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v18+
-- [Docker](https://www.docker.com/)
+- Node.js v18+
+- Docker
 
 ### 1. Clone the repo
 
