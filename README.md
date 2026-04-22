@@ -121,6 +121,6 @@ See [requirments.pdf](./requirments.pdf) for the full specification including pr
 ## AI Disclosure
 
 Portions of this project were developed with assistance from Claude (Anthropic). Specifically:
-- Requirements PDF document generation
+- Requirements PDF format help
 - Redis route boilerplate
 - EJS template for the trending venues page
