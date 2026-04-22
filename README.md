@@ -6,7 +6,7 @@ CS 3200 Database Design | Spring 2026 | Northeastern University
 
 ## Video Walkthrough
 Please download if you can't hear audio
-> [Video Link]
+> [Video Link](./CS3200Project3Video.mp4)
 
 
 ## Description
