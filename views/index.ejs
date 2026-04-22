@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<h1>ShowTracker</h1>
+
+<h3>SQLite (Primary Database)</h3>
+<p><a href="/venues">Manage Venues</a></p>
+<p><a href="/shows">Manage Shows</a></p>
+
+<h3>Redis (In-Memory Store)</h3>
+<p><a href="/trending">Trending Venues</a> — Sorted Set</p>
+<p><a href="/activity">Show Activity Feed</a> — List</p>
+
+<hr>
+<h3>Redis Controls</h3>
+<form action="/seed" method="POST" style="display:inline">
+  <button type="submit">Seed Sample Data</button>
+</form>
+<form action="/flush" method="POST" style="display:inline">
+  <button type="submit" onclick="return confirm('Flush all Redis data?')">Flush All Redis Data</button>
+</form>
+
+</body>
+</html>

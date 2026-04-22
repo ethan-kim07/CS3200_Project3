@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+<h2>Edit Venue</h2>
+<form action="/venues/<%= venue.venue_id %>/edit" method="POST">
+  <p>Name: <input type="text" name="name" value="<%= venue.name %>" required></p>
+  <p>City: <input type="text" name="city" value="<%= venue.city %>" required></p>
+  <p>State: <input type="text" name="state" value="<%= venue.state %>" required></p>
+  <p>Capacity: <input type="number" name="capacity" value="<%= venue.capacity || '' %>"></p>
+  <p>Genre Tags: <input type="text" name="genreTags" value="<%= venue.genreTags || '' %>"></p>
+  <p><button type="submit">Save Changes</button> <a href="/venues">Cancel</a></p>
+</form>
+
+</body>
+</html>

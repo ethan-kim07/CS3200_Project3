@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h2>Add New Show</h2>
+<form action="/shows" method="POST">
+  <p>Date: <input type="date" name="date" required></p>
+  <p>Venue:
+    <select name="venue_id" required>
+      <option value="">-- Select a Venue --</option>
+      <% venues.forEach(v => { %>
+        <option value="<%= v.venue_id %>"><%= v.name %> (<%= v.city %>, <%= v.state %>)</option>
+      <% }) %>
+    </select>
+  </p>
+  <p>Genre: <input type="text" name="genre"></p>
+  <p>Ticket Price: <input type="number" name="ticketPrice" step="0.01"></p>
+  <p><button type="submit">Add Show</button> <a href="/shows">Cancel</a></p>
+</form>
+
+</body>
+</html>

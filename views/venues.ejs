@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<h2>Venues</h2>
+<p><a href="/venues/new">Add New Venue</a></p>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Capacity</th>
+    <th>Genre Tags</th>
+    <th>Actions</th>
+  </tr>
+  <% venues.forEach(v => { %>
+    <tr>
+      <td><%= v.name %></td>
+      <td><%= v.city %></td>
+      <td><%= v.state %></td>
+      <td><%= v.capacity || '-' %></td>
+      <td><%= v.genreTags || '-' %></td>
+      <td>
+        <a href="/venues/<%= v.venue_id %>/edit">Edit</a>
+        <form action="/venues/<%= v.venue_id %>/delete" method="POST" style="display:inline">
+          <button type="submit" onclick="return confirm('Delete this venue?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+
+</body>
+</html>

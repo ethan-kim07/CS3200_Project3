@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+
+<h2>Trending Venues (Redis Sorted Set)</h2>
+<p>Key: <code>trendingVenues</code> | Total venues tracked: <strong><%= totalCount %></strong></p>
+
+<% if (entries.length === 0) { %>
+  <p><em>No data yet. <a href="/">Seed sample data</a> or record a view below.</em></p>
+<% } else { %>
+  <table border="1">
+    <tr>
+      <th>#</th>
+      <th>Venue ID</th>
+      <th>Venue Name</th>
+      <th>Views</th>
+      <th>Actions</th>
+    </tr>
+    <% entries.forEach((e, i) => { %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= e.venueId %></td>
+        <td><%= e.venueName %></td>
+        <td><%= e.views %></td>
+        <td>
+          <!-- ZINCRBY: increment view count by 1 -->
+          <form action="/trending/view" method="POST" style="display:inline">
+            <input type="hidden" name="venueId" value="<%= e.venueId %>" />
+            <button type="submit">+1 View</button>
+          </form>
+          <!-- ZREM: remove this venue from the set -->
+          <form action="/trending/remove" method="POST" style="display:inline">
+            <input type="hidden" name="venueId" value="<%= e.venueId %>" />
+            <button type="submit" onclick="return confirm('Remove from trending?')">Remove</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+<% } %>
+
+<hr>
+
+<h3>Record a View (ZINCRBY)</h3>
+<form action="/trending/view" method="POST">
+  <p>
+    Venue:
+    <select name="venueId" required>
+      <option value="">-- Select a Venue --</option>
+      <% allVenues.forEach(v => { %>
+        <option value="<%= v.venue_id %>"><%= v.name %> (<%= v.city %>, <%= v.state %>)</option>
+      <% }) %>
+    </select>
+    <button type="submit">Record View</button>
+  </p>
+</form>
+<p><em>Or enter a venue ID manually:</em></p>
+<form action="/trending/view" method="POST">
+  <p>
+    Venue ID: <input type="text" name="venueId" placeholder="e.g. 2" required />
+    <button type="submit">Record View</button>
+  </p>
+</form>
+
+<h3>Set Exact Score (ZADD)</h3>
+<form action="/trending/set-score" method="POST">
+  <p>
+    Venue ID: <input type="text" name="venueId" placeholder="e.g. 2" required />
+    Score: <input type="number" name="score" placeholder="50" min="0" required />
+    <button type="submit">Set Score</button>
+  </p>
+</form>
+
+<h3>Clear All (DEL)</h3>
+<form action="/trending/clear" method="POST">
+  <button type="submit" onclick="return confirm('Clear entire trending leaderboard?')">Clear All Trending Data</button>
+</form>
+
+</body>
+</html>

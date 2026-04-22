@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<h2>Shows</h2>
+<p><a href="/shows/new">Add New Show</a></p>
+
+<table border="1">
+  <tr>
+    <th>Date</th>
+    <th>Venue</th>
+    <th>Genre</th>
+    <th>Ticket Price</th>
+    <th>Actions</th>
+  </tr>
+  <% shows.forEach(s => { %>
+    <tr>
+      <td><%= s.date %></td>
+      <td><%= s.venue_name %></td>
+      <td><%= s.genre || '-' %></td>
+      <td><%= s.ticketPrice ? '$' + s.ticketPrice : '-' %></td>
+      <td>
+        <a href="/shows/<%= s.show_id %>/edit">Edit</a>
+        <form action="/shows/<%= s.show_id %>/delete" method="POST" style="display:inline">
+          <button type="submit" onclick="return confirm('Delete this show?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+
+</body>
+</html>
